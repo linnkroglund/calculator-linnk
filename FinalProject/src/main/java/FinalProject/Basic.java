@@ -33,7 +33,9 @@ public class Basic implements CalculatorBasicOperationsInterface {
 	 * Op - Operatorn som skall bestämma beräkningsmetod.
 	 * </p>
 	 *
-	 * @param  Num, Op
+	 * @param FNum Första siffran att beräkna
+	 * @param Op Operatorn som skall användas
+	 * @param SNum Andra siffran som skall beräknas
 	 */
 	
 	public Basic (double FNum, char Op, double SNum) {
@@ -48,9 +50,6 @@ public class Basic implements CalculatorBasicOperationsInterface {
 	 * doCalculation utför beräkning baserad på vilken operator som satts.
 	 * Svaret sparas i variabeln Result
 	 * </p>
-	 *
-	 * @param  array1, array2
-	 * @return resultArray
 	 */
 	
 	public void doCalculation() {

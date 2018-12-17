@@ -34,6 +34,8 @@ public class Main {
 
 	/**
 	 * Main-metoden i klassen Main startar kalkylatorn
+	 * 
+	 * @param args Standardparameter för main
 	 */
 	
 	public static void main(String[] args) {

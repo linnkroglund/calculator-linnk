@@ -32,7 +32,8 @@ public class Advanced implements CalculatorAdvancedOperationsInterface {
 	 * Op - Operatorn som skall bestämma beräkningsmetod.
 	 * </p>
 	 *
-	 * @param  Num, Op
+	 * @param Num Siffran att beräkna avancerad beräkning med
+	 * @param Op Operatorn som skall användas
 	 */
 	
 	public Advanced (double Num, String Op) {
@@ -47,9 +48,6 @@ public class Advanced implements CalculatorAdvancedOperationsInterface {
 	 * doCalculation utför beräkning baserad på vilken operator som satts.
 	 * Svaret sparas i variabeln Result
 	 * </p>
-	 *
-	 * @param  array1, array2
-	 * @return resultArray
 	 */
 	
 	public void doCalculation() {
