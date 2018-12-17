@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">FinalProject</a> &gt; <a href="index.source.html" class="el_package">FinalProject</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package FinalProject;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.SystemColor;
+
+public class Main {
+
+	private JFrame frmStandardCalculator;
+	private JTextField textField;
+
+	double firstnum;
+	double secondnum;
+	double result;
+	String operations;
+	String answer;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+<span class="nc" id="L33">		EventQueue.invokeLater(new Runnable() {</span>
+			public void run() {
+				try {
+<span class="nc" id="L36">					Main window = new Main();</span>
+<span class="nc" id="L37">					window.frmStandardCalculator.setVisible(true);</span>
+<span class="nc" id="L38">				} catch (Exception e) {</span>
+<span class="nc" id="L39">					e.printStackTrace();</span>
+<span class="nc" id="L40">				}</span>
+<span class="nc" id="L41">			}</span>
+		});
+<span class="nc" id="L43">	}</span>
+
+	/**
+	 * Create the application.
+	 */
+<span class="nc" id="L48">	public Main() {</span>
+<span class="nc" id="L49">		initialize();</span>
+<span class="nc" id="L50">	}</span>
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+<span class="nc" id="L56">		frmStandardCalculator = new JFrame();</span>
+<span class="nc" id="L57">		frmStandardCalculator.getContentPane().setForeground(SystemColor.activeCaption);</span>
+<span class="nc" id="L58">		frmStandardCalculator.setTitle(&quot;Standard Calculator&quot;);</span>
+<span class="nc" id="L59">		frmStandardCalculator.setBounds(100, 100, 255, 440);</span>
+<span class="nc" id="L60">		frmStandardCalculator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L61">		frmStandardCalculator.getContentPane().setLayout(null);</span>
+<span class="nc" id="L62">		frmStandardCalculator.setResizable(false);</span>
+
+<span class="nc" id="L64">		textField = new JTextField();</span>
+<span class="nc" id="L65">		textField.setBounds(10, 11, 230, 50);</span>
+<span class="nc" id="L66">		textField.setHorizontalAlignment(SwingConstants.RIGHT);</span>
+<span class="nc" id="L67">		frmStandardCalculator.getContentPane().add(textField);</span>
+<span class="nc" id="L68">		textField.setColumns(10);</span>
+
+		//--------------Rad 1 -------------
+<span class="nc" id="L71">		JButton buttonAC = new JButton(&quot;&quot;); //backspace</span>
+<span class="nc" id="L72">		buttonAC.setToolTipText(&quot;Backspace&quot;);</span>
+<span class="nc" id="L73">		buttonAC.setBackground(SystemColor.inactiveCaption);</span>
+<span class="nc" id="L74">		buttonAC.setForeground(new Color(0, 0, 0));</span>
+<span class="nc" id="L75">		buttonAC.setIcon(new ImageIcon(Main.class.getResource(&quot;/com/sun/javafx/scene/control/skin/caspian/images/backspace-icon.png&quot;)));</span>
+<span class="nc" id="L76">		buttonAC.setBounds(10, 75, 50, 50);</span>
+<span class="nc" id="L77">		buttonAC.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent e) {
+
+<span class="nc" id="L80">				String buttonAC = null;</span>
+
+<span class="nc bnc" id="L82" title="All 2 branches missed.">				if(textField.getText().length() &gt; 0) {</span>
+<span class="nc" id="L83">				StringBuilder strB = new StringBuilder(textField.getText());</span>
+<span class="nc" id="L84">				strB.deleteCharAt(textField.getText().length()-1);</span>
+<span class="nc" id="L85">				buttonAC = strB.toString();</span>
+<span class="nc" id="L86">				textField.setText(buttonAC);</span>
+
+				}
+<span class="nc" id="L89">			}</span>
+		});
+
+<span class="nc" id="L92">		buttonAC.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 12));</span>
+<span class="nc" id="L93">		frmStandardCalculator.getContentPane().add(buttonAC);</span>
+
+<span class="nc" id="L95">		JButton buttonC = new JButton(&quot;C&quot;);</span>
+<span class="nc" id="L96">		buttonC.setToolTipText(&quot;Clear&quot;);</span>
+<span class="nc" id="L97">		buttonC.setBackground(SystemColor.inactiveCaption);</span>
+<span class="nc" id="L98">		buttonC.setForeground(Color.WHITE);</span>
+<span class="nc" id="L99">		buttonC.setBounds(70, 75, 50, 50);</span>
+<span class="nc" id="L100">		buttonC.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L103">				textField.setText(null);</span>
+<span class="nc" id="L104">			}</span>
+		});
+<span class="nc" id="L106">		buttonC.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L107">		frmStandardCalculator.getContentPane().add(buttonC);</span>
+
+		// Button SqRt
+		
+<span class="nc" id="L111">		JButton buttonPro = new JButton(&quot;Sqr&quot;);</span>
+<span class="nc" id="L112">		buttonPro.setForeground(Color.WHITE);</span>
+<span class="nc" id="L113">		buttonPro.setBackground(SystemColor.inactiveCaption);</span>
+<span class="nc" id="L114">		buttonPro.setBounds(130, 75, 50, 50);</span>
+<span class="nc" id="L115">		buttonPro.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+			String answer;
+<span class="nc" id="L118">			firstnum = Double.parseDouble(textField.getText());</span>
+		    
+		    // Creates Basic Class Instance
+<span class="nc" id="L121">		    Advanced a = new Advanced (firstnum, &quot;Root&quot;);</span>
+
+		    // Calls the class methods
+<span class="nc" id="L124">		    a.doCalculation();</span>
+<span class="nc" id="L125">		    answer = a.getResult();</span>
+		    
+		    // Sets answer to textfield
+<span class="nc" id="L128">			textField.setText(answer);</span>
+<span class="nc" id="L129">			}</span>
+		});
+<span class="nc" id="L131">		buttonPro.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 10));</span>
+<span class="nc" id="L132">		frmStandardCalculator.getContentPane().add(buttonPro);</span>
+
+<span class="nc" id="L134">		JButton buttonDiv = new JButton(&quot;/&quot;);</span>
+<span class="nc" id="L135">		buttonDiv.setForeground(Color.WHITE);</span>
+<span class="nc" id="L136">		buttonDiv.setBackground(SystemColor.inactiveCaption);</span>
+<span class="nc" id="L137">		buttonDiv.setBounds(190, 75, 50, 50);</span>
+<span class="nc" id="L138">		buttonDiv.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L141">				firstnum = Double.parseDouble(textField.getText());</span>
+<span class="nc" id="L142">				textField.setText(&quot;&quot;);</span>
+<span class="nc" id="L143">				operations = &quot;/&quot;;</span>
+<span class="nc" id="L144">			}</span>
+		});
+<span class="nc" id="L146">		buttonDiv.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L147">		frmStandardCalculator.getContentPane().add(buttonDiv);</span>
+
+		//--------------Rad 2 -------------
+		
+<span class="nc" id="L151">		final JButton btn7 = new JButton(&quot;7&quot;);</span>
+<span class="nc" id="L152">		btn7.setBounds(10, 136, 50, 50);</span>
+<span class="nc" id="L153">		btn7.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L156">				String EnterNumber = textField.getText() + btn7.getText();</span>
+<span class="nc" id="L157">				textField.setText(EnterNumber);</span>
+<span class="nc" id="L158">			}</span>
+		});
+<span class="nc" id="L160">		btn7.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L161">		frmStandardCalculator.getContentPane().add(btn7);</span>
+
+<span class="nc" id="L163">		final JButton btn8 = new JButton(&quot;8&quot;);</span>
+<span class="nc" id="L164">		btn8.setBounds(70, 136, 50, 50);</span>
+<span class="nc" id="L165">		btn8.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L168">				String EnterNumber = textField.getText() + btn8.getText();</span>
+<span class="nc" id="L169">				textField.setText(EnterNumber);</span>
+<span class="nc" id="L170">			}</span>
+		});
+
+<span class="nc" id="L173">		btn8.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L174">		frmStandardCalculator.getContentPane().add(btn8);</span>
+
+
+
+<span class="nc" id="L178">		final JButton btn9 = new JButton(&quot;9&quot;);</span>
+<span class="nc" id="L179">		btn9.setBounds(130, 136, 50, 50);</span>
+<span class="nc" id="L180">		btn9.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L183">				String EnterNumber = textField.getText() + btn9.getText();</span>
+<span class="nc" id="L184">				textField.setText(EnterNumber);</span>
+<span class="nc" id="L185">			}</span>
+		});
+<span class="nc" id="L187">		btn9.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L188">		frmStandardCalculator.getContentPane().add(btn9);</span>
+
+<span class="nc" id="L190">		JButton btnPlus = new JButton(&quot;+&quot;);</span>
+<span class="nc" id="L191">		btnPlus.setForeground(Color.WHITE);</span>
+<span class="nc" id="L192">		btnPlus.setBackground(SystemColor.inactiveCaption);</span>
+<span class="nc" id="L193">		btnPlus.setBounds(190, 136, 50, 50);</span>
+<span class="nc" id="L194">		btnPlus.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent e) {
+
+<span class="nc" id="L197">				firstnum = Double.parseDouble(textField.getText());</span>
+<span class="nc" id="L198">				textField.setText(&quot;&quot;);</span>
+<span class="nc" id="L199">				operations = &quot;+&quot;;</span>
+<span class="nc" id="L200">			}</span>
+		});
+<span class="nc" id="L202">		btnPlus.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L203">		frmStandardCalculator.getContentPane().add(btnPlus);</span>
+
+		//--------------Rad 3 -------------
+
+<span class="nc" id="L207">		final JButton btn4 = new JButton(&quot;4&quot;);</span>
+<span class="nc" id="L208">		btn4.setBounds(10, 197, 50, 50);</span>
+<span class="nc" id="L209">		btn4.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L212">				String EnterNumber = textField.getText() + btn4.getText();</span>
+<span class="nc" id="L213">				textField.setText(EnterNumber);</span>
+<span class="nc" id="L214">			}</span>
+		});
+<span class="nc" id="L216">		btn4.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L217">		frmStandardCalculator.getContentPane().add(btn4);</span>
+
+<span class="nc" id="L219">		final JButton btn5 = new JButton(&quot;5&quot;);</span>
+<span class="nc" id="L220">		btn5.setBounds(70, 197, 50, 50);</span>
+<span class="nc" id="L221">		btn5.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L224">				String EnterNumber = textField.getText() + btn5.getText();</span>
+<span class="nc" id="L225">				textField.setText(EnterNumber);</span>
+<span class="nc" id="L226">			}</span>
+		});
+<span class="nc" id="L228">		btn5.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L229">		frmStandardCalculator.getContentPane().add(btn5);</span>
+
+<span class="nc" id="L231">		final JButton btn6 = new JButton(&quot;6&quot;);</span>
+<span class="nc" id="L232">		btn6.setBounds(130, 197, 50, 50);</span>
+<span class="nc" id="L233">		btn6.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L236">				String EnterNumber = textField.getText() + btn6.getText();</span>
+<span class="nc" id="L237">				textField.setText(EnterNumber);</span>
+<span class="nc" id="L238">			}</span>
+		});
+<span class="nc" id="L240">		btn6.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L241">		frmStandardCalculator.getContentPane().add(btn6);</span>
+
+<span class="nc" id="L243">		JButton btnSub = new JButton(&quot;-&quot;);</span>
+<span class="nc" id="L244">		btnSub.setForeground(Color.WHITE);</span>
+<span class="nc" id="L245">		btnSub.setBackground(SystemColor.inactiveCaption);</span>
+<span class="nc" id="L246">		btnSub.setBounds(190, 197, 50, 50);</span>
+<span class="nc" id="L247">		btnSub.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L250">				firstnum = Double.parseDouble(textField.getText());</span>
+<span class="nc" id="L251">				textField.setText(&quot;&quot;);</span>
+<span class="nc" id="L252">				operations = &quot;-&quot;;</span>
+<span class="nc" id="L253">			}</span>
+		});
+<span class="nc" id="L255">		btnSub.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L256">		frmStandardCalculator.getContentPane().add(btnSub);</span>
+
+		//--------------Rad 4 -------------
+
+<span class="nc" id="L260">		final JButton btn1 = new JButton(&quot;1&quot;);</span>
+<span class="nc" id="L261">		btn1.setBounds(10, 258, 50, 50);</span>
+<span class="nc" id="L262">		btn1.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L265">				String EnterNumber = textField.getText() + btn1.getText();</span>
+<span class="nc" id="L266">				textField.setText(EnterNumber);</span>
+<span class="nc" id="L267">			}</span>
+		});
+<span class="nc" id="L269">		btn1.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L270">		frmStandardCalculator.getContentPane().add(btn1);</span>
+
+<span class="nc" id="L272">		final JButton btn2 = new JButton(&quot;2&quot;);</span>
+<span class="nc" id="L273">		btn2.setBounds(70, 258, 50, 50);</span>
+<span class="nc" id="L274">		btn2.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L277">				String EnterNumber = textField.getText() + btn2.getText();</span>
+<span class="nc" id="L278">				textField.setText(EnterNumber);</span>
+<span class="nc" id="L279">			}</span>
+		});
+<span class="nc" id="L281">		btn2.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L282">		frmStandardCalculator.getContentPane().add(btn2);</span>
+
+<span class="nc" id="L284">		final JButton btn3 = new JButton(&quot;3&quot;);</span>
+<span class="nc" id="L285">		btn3.setBounds(130, 258, 50, 50);</span>
+<span class="nc" id="L286">		btn3.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L289">				String EnterNumber = textField.getText() + btn3.getText();</span>
+<span class="nc" id="L290">				textField.setText(EnterNumber);</span>
+<span class="nc" id="L291">			}</span>
+		});
+<span class="nc" id="L293">		btn3.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L294">		frmStandardCalculator.getContentPane().add(btn3);</span>
+
+<span class="nc" id="L296">		JButton btnMult = new JButton(&quot;*&quot;);</span>
+<span class="nc" id="L297">		btnMult.setForeground(Color.WHITE);</span>
+<span class="nc" id="L298">		btnMult.setBackground(SystemColor.inactiveCaption);</span>
+<span class="nc" id="L299">		btnMult.setBounds(190, 258, 50, 50);</span>
+<span class="nc" id="L300">		btnMult.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L303">				firstnum = Double.parseDouble(textField.getText());</span>
+<span class="nc" id="L304">				textField.setText(&quot;&quot;);</span>
+<span class="nc" id="L305">				operations = &quot;*&quot;;</span>
+<span class="nc" id="L306">			}</span>
+		});
+<span class="nc" id="L308">		btnMult.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L309">		frmStandardCalculator.getContentPane().add(btnMult);</span>
+
+		//--------------Rad 5 -------------
+
+<span class="nc" id="L313">		final JButton btn0 = new JButton(&quot;0&quot;);</span>
+<span class="nc" id="L314">		btn0.setBounds(10, 319, 50, 50);</span>
+<span class="nc" id="L315">		btn0.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L318">				String EnterNumber = textField.getText() + btn0.getText();</span>
+<span class="nc" id="L319">				textField.setText(EnterNumber);</span>
+<span class="nc" id="L320">			}</span>
+		});
+<span class="nc" id="L322">		btn0.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L323">		frmStandardCalculator.getContentPane().add(btn0);</span>
+
+<span class="nc" id="L325">		JButton btnDot = new JButton(&quot;,&quot;);</span>
+<span class="nc" id="L326">		btnDot.setBounds(70, 319, 50, 50);</span>
+<span class="nc" id="L327">		btnDot.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L328">		btnDot.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L331">				String EnterNumber = textField.getText() + &quot;.&quot;;</span>
+<span class="nc" id="L332">				textField.setText(EnterNumber);</span>
+<span class="nc" id="L333">			}</span>
+		});
+<span class="nc" id="L335">		frmStandardCalculator.getContentPane().add(btnDot);</span>
+
+		
+		
+<span class="nc" id="L339">		JButton btnPM = new JButton(&quot;+ -&quot;);</span>
+<span class="nc" id="L340">		btnPM.setBounds(130, 319, 50, 50);</span>
+<span class="nc" id="L341">		btnPM.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+
+<span class="nc" id="L344">				double ops = Double.parseDouble(String.valueOf(textField.getText()));</span>
+<span class="nc" id="L345">				ops = ops * (-1);</span>
+<span class="nc" id="L346">				textField.setText(String.valueOf(ops));</span>
+
+<span class="nc" id="L348">			}</span>
+		});
+<span class="nc" id="L350">		btnPM.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 12));</span>
+<span class="nc" id="L351">		frmStandardCalculator.getContentPane().add(btnPM);</span>
+		
+		//--------------Equal -------------
+
+<span class="nc" id="L355">		JButton btnEqual = new JButton(&quot;=&quot;); </span>
+<span class="nc" id="L356">		btnEqual.setForeground(Color.WHITE);</span>
+<span class="nc" id="L357">		btnEqual.setBackground(SystemColor.inactiveCaption);</span>
+<span class="nc" id="L358">		btnEqual.setBounds(190, 319, 50, 50);</span>
+<span class="nc" id="L359">		btnEqual.addActionListener(new ActionListener() {</span>
+			
+		public void actionPerformed(ActionEvent arg0) {
+			
+			String answer;
+<span class="nc" id="L364">			secondnum = Double.parseDouble(textField.getText());</span>
+
+		    // Convert Operations from string to char
+<span class="nc" id="L367">		    char c=operations.charAt(0);</span>
+		    
+		    // Creates Basic Class Instance
+<span class="nc" id="L370">		    Basic b = new Basic (firstnum, c, secondnum);</span>
+
+		    // Calls the class methods
+<span class="nc" id="L373">		    b.doCalculation();</span>
+<span class="nc" id="L374">		    answer = b.getResult();</span>
+		    
+		    // Sets answer to textfield
+<span class="nc" id="L377">			textField.setText(answer);</span>
+		    
+<span class="nc" id="L379">			}</span>
+		});
+<span class="nc" id="L381">		btnEqual.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 18));</span>
+<span class="nc" id="L382">		frmStandardCalculator.getContentPane().add(btnEqual);</span>
+		
+		//-------------- Advanced button -------------
+		
+		/* JButton btnRot = new JButton(&quot;Rot&quot;);
+		btnRot.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnRot.setForeground(Color.WHITE);
+		btnRot.setBackground(SystemColor.inactiveCaption);
+		btnRot.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));
+		btnRot.setBounds(250, 75, 64, 50);
+		frmStandardCalculator.getContentPane().add(btnRot); */
+		
+<span class="nc" id="L397">		JButton btnRot = new JButton(&quot;X^2&quot;);</span>
+<span class="nc" id="L398">		btnRot.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+			String answer;
+<span class="nc" id="L401">			firstnum = Double.parseDouble(textField.getText());</span>
+		    
+		    // Creates Basic Class Instance
+<span class="nc" id="L404">		    Advanced a = new Advanced (firstnum, &quot;X2&quot;);</span>
+
+		    // Calls the class methods
+<span class="nc" id="L407">		    a.doCalculation();</span>
+<span class="nc" id="L408">		    answer = a.getResult();</span>
+		    
+		    // Sets answer to textfield
+<span class="nc" id="L411">			textField.setText(answer);</span>
+			
+<span class="nc" id="L413">			}</span>
+		});
+<span class="nc" id="L415">		btnRot.setForeground(Color.WHITE);</span>
+<span class="nc" id="L416">		btnRot.setBackground(SystemColor.inactiveCaption);</span>
+<span class="nc" id="L417">		btnRot.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L418">		btnRot.setBounds(250, 75, 64, 50);</span>
+<span class="nc" id="L419">		frmStandardCalculator.getContentPane().add(btnRot);</span>
+		
+		// PI
+		
+<span class="nc" id="L423">		JButton btnPi = new JButton(&quot;X^3&quot;);</span>
+<span class="nc" id="L424">		btnPi.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent e) {
+			String answer;
+<span class="nc" id="L427">			firstnum = Double.parseDouble(textField.getText());</span>
+		    
+		    // Creates Basic Class Instance
+<span class="nc" id="L430">		    Advanced a = new Advanced (firstnum, &quot;X3&quot;);</span>
+
+		    // Calls the class methods
+<span class="nc" id="L433">		    a.doCalculation();</span>
+<span class="nc" id="L434">		    answer = a.getResult();</span>
+		    
+		    // Sets answer to textfield
+<span class="nc" id="L437">			textField.setText(answer);</span>
+<span class="nc" id="L438">			}</span>
+		});
+<span class="nc" id="L440">		btnPi.setForeground(Color.WHITE);</span>
+<span class="nc" id="L441">		btnPi.setBackground(SystemColor.inactiveCaption);</span>
+<span class="nc" id="L442">		btnPi.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L443">		btnPi.setBounds(250, 136, 64, 50);</span>
+<span class="nc" id="L444">		frmStandardCalculator.getContentPane().add(btnPi);</span>
+		
+<span class="nc" id="L446">		JButton btnX = new JButton(&quot;Sin&quot;);</span>
+<span class="nc" id="L447">		btnX.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent e) {
+			String answer;
+<span class="nc" id="L450">			firstnum = Double.parseDouble(textField.getText());</span>
+		    
+		    // Creates Basic Class Instance
+<span class="nc" id="L453">		    Advanced a = new Advanced (firstnum, &quot;Sin&quot;);</span>
+
+		    // Calls the class methods
+<span class="nc" id="L456">		    a.doCalculation();</span>
+<span class="nc" id="L457">		    answer = a.getResult();</span>
+		    
+		    // Sets answer to textfield
+<span class="nc" id="L460">			textField.setText(answer);</span>
+<span class="nc" id="L461">			}</span>
+		});
+<span class="nc" id="L463">		btnX.setForeground(Color.WHITE);</span>
+<span class="nc" id="L464">		btnX.setBackground(SystemColor.inactiveCaption);</span>
+<span class="nc" id="L465">		btnX.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L466">		btnX.setBounds(250, 197, 64, 50);</span>
+<span class="nc" id="L467">		frmStandardCalculator.getContentPane().add(btnX);</span>
+		
+<span class="nc" id="L469">		JButton btnY = new JButton(&quot;Cos&quot;);</span>
+<span class="nc" id="L470">		btnY.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent e) {
+			String answer;
+<span class="nc" id="L473">			firstnum = Double.parseDouble(textField.getText());</span>
+		    
+		    // Creates Basic Class Instance
+<span class="nc" id="L476">		    Advanced a = new Advanced (firstnum, &quot;Cos&quot;);</span>
+
+		    // Calls the class methods
+<span class="nc" id="L479">		    a.doCalculation();</span>
+<span class="nc" id="L480">		    answer = a.getResult();</span>
+		    
+		    // Sets answer to textfield
+<span class="nc" id="L483">			textField.setText(answer);</span>
+<span class="nc" id="L484">			}</span>
+		});
+<span class="nc" id="L486">		btnY.setForeground(Color.WHITE);</span>
+<span class="nc" id="L487">		btnY.setBackground(SystemColor.inactiveCaption);</span>
+<span class="nc" id="L488">		btnY.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L489">		btnY.setBounds(250, 258, 64, 50);</span>
+<span class="nc" id="L490">		frmStandardCalculator.getContentPane().add(btnY);</span>
+		
+<span class="nc" id="L492">		JButton btnCos = new JButton(&quot;Tan&quot;);</span>
+<span class="nc" id="L493">		btnCos.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent e) {
+			String answer;
+<span class="nc" id="L496">			firstnum = Double.parseDouble(textField.getText());</span>
+		    
+		    // Creates Basic Class Instance
+<span class="nc" id="L499">		    Advanced a = new Advanced (firstnum, &quot;Tan&quot;);</span>
+
+		    // Calls the class methods
+<span class="nc" id="L502">		    a.doCalculation();</span>
+<span class="nc" id="L503">		    answer = a.getResult();</span>
+		    
+		    // Sets answer to textfield
+<span class="nc" id="L506">			textField.setText(answer);</span>
+<span class="nc" id="L507">			}</span>
+		});
+<span class="nc" id="L509">		btnCos.setForeground(Color.WHITE);</span>
+<span class="nc" id="L510">		btnCos.setBackground(SystemColor.inactiveCaption);</span>
+<span class="nc" id="L511">		btnCos.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 14));</span>
+<span class="nc" id="L512">		btnCos.setBounds(250, 319, 64, 50);</span>
+<span class="nc" id="L513">		frmStandardCalculator.getContentPane().add(btnCos);</span>
+		
+		//-------------- Menu Bar -------------
+<span class="nc" id="L516">		JMenuBar menuBar = new JMenuBar();</span>
+<span class="nc" id="L517">		frmStandardCalculator.setJMenuBar(menuBar);</span>
+		
+<span class="nc" id="L519">		JMenu mnNewMenu = new JMenu(&quot;File&quot;);</span>
+<span class="nc" id="L520">		mnNewMenu.setIcon(new ImageIcon(Main.class.getResource(&quot;/com/sun/javafx/scene/control/skin/caspian/dialog-more-details.png&quot;)));</span>
+<span class="nc" id="L521">		mnNewMenu.setHorizontalAlignment(SwingConstants.LEFT);</span>
+<span class="nc" id="L522">		menuBar.add(mnNewMenu);</span>
+		
+<span class="nc" id="L524">		JMenuItem mntmNewMenuItem = new JMenuItem(&quot;Standard&quot;);</span>
+<span class="nc" id="L525">		mntmNewMenuItem.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent arg0) {
+			
+<span class="nc" id="L528">			frmStandardCalculator.setTitle(&quot;Standard Calculator&quot;);</span>
+<span class="nc" id="L529">			frmStandardCalculator.setBounds(100, 100, 255, 440);</span>
+<span class="nc" id="L530">			textField.setBounds(10, 11, 230, 37);</span>
+<span class="nc" id="L531">			}</span>
+		});
+<span class="nc" id="L533">		mntmNewMenuItem.setHorizontalAlignment(SwingConstants.LEFT);</span>
+<span class="nc" id="L534">		mnNewMenu.add(mntmNewMenuItem);</span>
+		
+<span class="nc" id="L536">		JMenuItem mntmAdvanced = new JMenuItem(&quot;Advanced&quot;);</span>
+<span class="nc" id="L537">		mntmAdvanced.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent e) {
+				
+<span class="nc" id="L540">				frmStandardCalculator.setTitle(&quot;Advanced Calculator&quot;);</span>
+<span class="nc" id="L541">				frmStandardCalculator.setBounds(100, 100, 330, 440);</span>
+<span class="nc" id="L542">				textField.setBounds(10, 11, 300, 37);</span>
+<span class="nc" id="L543">			}</span>
+		});
+<span class="nc" id="L545">		mntmAdvanced.setHorizontalAlignment(SwingConstants.LEFT);</span>
+<span class="nc" id="L546">		mnNewMenu.add(mntmAdvanced);</span>
+		
+<span class="nc" id="L548">		JMenuItem mntmExit = new JMenuItem(&quot;Exit&quot;);</span>
+<span class="nc" id="L549">		mntmExit.addActionListener(new ActionListener() {</span>
+		public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L551">				System.exit(0);</span>
+<span class="nc" id="L552">			}</span>
+		});
+<span class="nc" id="L554">		mntmExit.setHorizontalAlignment(SwingConstants.LEFT);</span>
+<span class="nc" id="L555">		mnNewMenu.add(mntmExit);</span>
+		
+		
+<span class="nc" id="L558">	}	</span>
+}
+	
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
